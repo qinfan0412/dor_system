@@ -1,0 +1,90 @@
+{% extends 'user/base2.html' %}
+
+{% block title %}
+    宿舍报修申请
+{% endblock %}
+{% block content %}
+    <div class="grid_3" style="background: url('/static/user/images/b2.jpg')">
+        <div class="container">
+            <div class="breadcrumb1">
+                <ul>
+                    <a href="/user/index2/"><i class="fa fa-home home_1"></i></a>
+                    <span class="divider">&nbsp;|&nbsp;</span>
+                    <li class="current-page" style="color: red;font-family: 华文行楷;font-size: 20px">宿舍维修申请单</li>
+                </ul>
+            </div>
+            <div class="services">
+                <div class="col-sm-6 login_left">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="edit-name"><span class="form-required">*</span>姓名</label>
+                            <input type="text" value="{{ user.name }}" size="60" maxlength="60" placeholder="请输入名字"
+                                   name="name"
+                                   class="btn btn-warning dropdown-toggle btn-user btn-block">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-name"><span class="form-required">*</span>电话</label>
+                            <input type="text" value="{{ user.phone }}" size="60" maxlength="60" placeholder="请输入电话"
+                                   name="phone"
+                                   class="btn btn-warning dropdown-toggle btn-user btn-block">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-name"><span class="form-required">*</span>报修宿舍</label>
+                            <select name="dor" id="dor"
+                                    class="btn btn-warning dropdown-toggle btn-user btn-block"
+                                    style="height: 45px;display: inline">
+                                {% for i in all_dor %}
+                                    <option value="{{ i.num }}">{{ i.num }}({{ i.sex }})</option>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-name"><span class="form-required">*</span>报修原因 </label>
+                            <textarea class="btn btn-warning dropdown-toggle btn-user btn-block"
+                                      style="height: 100px" name="remarks"
+                                      placeholder="请填写报修信息...."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" value="提交报修申请" class="btn btn-primary"
+                                   style="margin-left: 40%">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-6">
+                    <p style="margin-top:50px;font-size: 40px;font-family: 华文行楷;margin-left: 10%;color: red">
+                        {{ content }}    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('#dor_lou').change(
+            function () {
+                dor_lou = $('#dor_lou').val();
+                $.ajax(
+                    {
+                        url: '/user/get_dor_hao/?num=' + dor_lou,
+                        type: "get",
+                        data: '',
+                        success: function (result) {
+                            console.log(result);
+                            str = '';
+                            for (i in result) {
+                                //字符串拼接，将遍历的省信息拼接出来
+                                str += '<option value="' + result[i] + '">' + result[i] + '</option>';
+                            }
+                            $('#dor_hao').html(str);
+                        },
+                        error: function (error) {
+                            console.log(error)
+                        }
+                    }
+                )
+            }
+        );
+    </script>
+{% endblock %}

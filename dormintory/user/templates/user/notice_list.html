@@ -1,0 +1,92 @@
+{% extends 'user/base2.html' %}
+
+{% block title %}
+    宿舍公告
+{% endblock %}
+{% block content %}
+    <div class="grid_3" style="background: url('/static/user/images/back1.jpeg')">
+        <div class="container">
+            <div class="breadcrumb1">
+                <ul>
+                    <a href="/user/index2/"><i class="fa fa-home home_1"></i></a>
+                    <span class="divider">&nbsp;|&nbsp;</span>
+                    <li class="current-page" style="color: red;font-family: 华文行楷;font-size: 20px"> Notice List
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9 profile_left2">
+                <h4 style="font-family: 华文行楷;font-size: 20px">宿舍公告列表 </h4>
+                {% if notice %}
+                    {% for i in notice %}
+                        <hr>
+                        <div class="profile_top"><a href="#">
+                            <div class="col-sm-3 profile_left-top">
+                                <img src="/static/user/images/a5.jpg" class="img-responsive" alt=""/>
+                            </div>
+                            <div class="col-sm-6">
+                                <table class="table_working_hours">
+
+                                    <tbody>
+                                    <tr class="opened_1">
+                                        <td class="day_label1"
+                                            style="font-weight: 700;color: black;font-size: 20px;font-family: 宋体">公告标题 :
+                                        </td>
+                                        <td class="day_value"><p
+                                                style="font-weight: 700;color: black;font-size: 20px;font-family: 宋体">{{ i.title }}</p>
+                                        </td>
+
+                                    <tr class="opened_1">
+                                        <td class="day_label1"
+                                            style="font-weight: 700;color: black;font-size: 20px;font-family: 宋体">发布管理员
+                                            :
+                                        </td>
+                                        <td class="day_value"><p
+                                                style="font-weight: 700;color: black;font-size: 20px;font-family: 宋体"> {{ i.user_name }}</p>
+                                        </td>
+
+                                    </tr>
+                                    <tr class="opened">
+                                        <td class="day_label1"
+                                            style="font-weight: 700;color: black;font-size: 20px;font-family: 宋体">发布时间：
+                                        </td>
+                                        <td class="day_value"><p
+                                                style="font-weight: 700;color: black;font-size: 20px;font-family: 宋体">{{ i.send_time }}</p>
+                                        </td>
+                                    </tr>
+                                    <tr class="opened">
+                                        <td class="day_label1"
+                                            style="font-weight: 700;color: black;font-size: 20px;font-family: 宋体">
+                                            最后更新时间：
+                                        </td>
+                                        <td class="day_value"><p
+                                                style="font-weight: 700;color: black;font-size: 20px;font-family: 宋体">{{ i.finally_time }}</p>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                                <div class="buttons" style="margin-left: 50%">
+                                    <a href="/user/notice_look/{{ i.id }}/" type="button" class="btn_1"
+                                       style="margin-left: 50px;">查看公告详情</a>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </a></div>
+
+                    {% endfor %}
+                {% else %}
+
+                    <p style="margin-top:50px;font-size: 140px;font-family: 华文行楷;margin-left: 10%;color: red">
+                        暂无 </p>
+                    <p style="margin-top:50px;font-size: 140px;font-family: 华文行楷;margin-left: 32%;color: red">
+                        公告 </p>
+                {% endif %}
+
+
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>
+{% endblock %}

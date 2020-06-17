@@ -1,0 +1,56 @@
+{% extends 'housemaster/base.html' %}
+{% block title %}
+    宿舍报修
+{% endblock %}
+{% block content %}
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="position: relative">
+            <h6 class="m-0 font-weight-bold text-primary" style="display: inline-block">报修申请表</h6>
+            <a href="/housemaster/fix_dor_list/1/" type="button"
+               style="display: inline-block;position: absolute;top: 8px;right: 20px"
+               class="btn btn-google">☚返回报修宿舍列表
+            </a>
+        </div>
+        <div class="card-body">
+            {% csrf_token %}
+            <form method="post">
+                {% csrf_token %}
+                <label style="display: inline-block">报修单号：</label>
+                <input type="text" class="form-control form-control-user" value="{{ fix_dor.id }}" disabled
+                       style="width: 90%;display: inline-block"><br><br>
+
+
+                <label>报修学生：</label>
+                <input type="text" class="form-control form-control-user"
+                       value="{{ fix_dor.name }}(账号：{{ fix_dor.stu_id }})" disabled
+                       style="width: 90%;display: inline-block"><br><br>
+                <label>联系电话：</label>
+                <input type="text" class="form-control form-control-user" value="{{ fix_dor.phone }}"
+                       disabled style="width: 90%;display: inline-block"><br><br>
+
+                <label>维修宿舍：</label>
+                <input type="text" class="form-control form-control-user" value="{{ fix_dor.dor }}宿舍"
+                       disabled
+                       style="width: 90%;display: inline-block"><br><br>
+
+
+                <label>报修原因：</label>
+                <textarea placeholder="可不填写" style="width: 90%;height: 200px;display: inline-block"
+                          class="form-control form-control-user"
+                          disabled>{{ fix_dor.detail_remarks }}</textarea><br>
+
+
+                {% if fix_dor.status == 0 %}
+                    <input type="submit" value="确认拨打维修电话！进行处理" class="btn btn-primary btn-user btn-block"
+                           style="width: 40%;margin-left: 30%">
+                {% else %}
+                    <p style="font-size: 28px;font-family: 华文行楷;color: red;margin-left: 40%"> 已处理!</p>
+
+                {% endif %}
+
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'user/base2.html' %}
+{% block title %}
+    修改个人信息
+{% endblock %}
+{% block content %}
+
+    <div class="about_middle">
+        <div class="container">
+            <h2>Update Info</h2>
+            <form id="contact-form" class="contact-form" method="post">
+                {% csrf_token %}
+                <fieldset>
+                    <label for="edit-name" style="display: block">姓名 <span class="form-required">*</span></label>
+                    <input type="text" class="text"  id="name1" placeholder="请输入姓名"
+                           value='{{ user.name }}'>
+                    <label for="edit-name">性别(不可更改) <span class="form-required">*</span></label>
+                    <input type="text" class="text" value='{{ user.sex }}' disabled>
+
+                    <label for="edit-name">邮箱(不可更改) <span class="form-required">*</span></label>
+                    <input type="text" class="text" value='{{ user.email }}' disabled>
+                    <label for="edit-name">宿舍(不可更改) </label>
+                    <input type="text" class="text" name="location" placeholder="请输入宿舍" disabled
+                           value='{{ user.dor.num }}({{ user.dor.sex }})'>
+
+                    <label for="edit-name">专业和班级<span class="form-required">*</span> </label>
+                    <input type="text" class="text" id="major_class" placeholder="请输入专业班级"
+                           value='{{ user.major_class }}'>
+                    <label for="edit-name">出生年月<span class="form-required">*</span> </label>
+                    <input type="text" class="text"  id="birthday" placeholder="请输入出生年月"
+                           value='{{ user.birthday }}'>
+                     <label for="edit-name">联系电话<span class="form-required">*</span> </label>
+                    <input type="text" class="text"  id="phone1" placeholder="请输入联系电话"
+                           value='{{ user.phone }}'>
+                    <label for="edit-name">备注 </label>
+                    <textarea  id="remarks" placeholder="若有其他注意，请输入你的备注信息">{{ user.remarks }}</textarea>
+                    <input id="submit" type="button" class="btn btn-primary" style="width: 99%" value="确认修改">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <script>
+        $('#submit').click(
+            function () {
+                name1 = $('#name1').val();
+                phone1 = $('#phone1').val();
+                major_class = $('#major_class').val();
+                birthday = $('#birthday').val();
+                remarks = $('#remarks').val();
+                // 构造一个数据字典
+                send_data = {
+                    'name1': name1,
+                    'phone1': phone1,
+                    'major_class': major_class,
+                    'birthday': birthday,
+                    'remarks': remarks,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                };
+                $.ajax(
+                    {
+                        url: '/user/update_info_ajax/',
+                        type: "post",
+                        data: send_data,
+                        success: function (data) {
+                            alert(data.content)
+                        },
+                        error: function (error) {
+                            console.log(error)
+                        }
+                    }
+                )
+            }
+        )
+    </script>
+{% endblock %}

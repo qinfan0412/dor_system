@@ -1,0 +1,68 @@
+{% extends 'housemaster/base.html' %}
+{% block title %}
+    公告列表
+{% endblock %}
+{% block search %}
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="请输入标题关键词..."
+                   aria-label="Search" aria-describedby="basic-addon2" name="search">
+            <div class="input-group-append">
+                <button class="btn btn-primary">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <p style="font-family: 华文行楷;color: red;display: inline-block;font-size: 30px;margin-top: 10px">{{ result }}</p>
+{% endblock %}
+{% block content %}
+
+    <table class="table">
+        <tr>
+            <th>发布账号</th>
+            <th>发布管理员</th>
+            <th>发布标题</th>
+            <th>发布时间</th>
+            <th>最后更新时间</th>
+            <th>公告操作</th>
+        </tr>
+        {% for foo in page_obj %}
+            <tr>
+                <td style="color: red">{{ foo.id }}</td>
+                <td>{{ foo.user_name }}</td>
+                <td>{{ foo.title }}</td>
+                <td>{{ foo.send_time }}</td>
+                <td>{{ foo.finally_time }}</td>
+                <td>
+                    {% if foo.user_id == user_id %}
+                        <a href="/housemaster/notice_update/?id={{ foo.id }}" type="button"
+                           class="btn btn-facebook">修改公告</a>
+                        <a href="/housemaster/notice_list/{{ page_obj.number }}/?del_id={{ foo.id }}" type="button"
+                           class="btn btn-danger">删除公告</a>
+                    {% else %}
+                        <a href="/housemaster/notice_look/?id={{ foo.id }}" type="button"
+                           class="btn btn-dark" style="width: 180px">查看详情</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <ul class="pagination" style="position: absolute;bottom: 100px;left: 45%">
+        <a class="page-link" href="/housemaster/notice_list/1">首页</a>
+
+        {% if page_obj.has_previous %}
+            <a class="page-link"
+               href="/housemaster/notice_list/{{ page_obj.previous_page_number }}">上一页</a>
+
+        {% endif %}
+        <a class="page-link" style="color: green;font-weight: 700"
+           href="/housemaster/notice_list/{{ page_obj.number }}">{{ page_obj.number }}</a>
+        {% if page_obj.has_next %}
+            <a class="page-link"
+               href="/housemaster/notice_list/{{ page_obj.next_page_number }}">下一页</a>
+        {% endif %}
+
+        <a class="page-link" href="/housemaster/notice_list/{{ paginator.num_pages }}">尾页</a>
+    </ul>
+{% endblock %}

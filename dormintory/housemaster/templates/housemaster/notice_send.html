@@ -1,0 +1,56 @@
+{% extends 'housemaster/base.html' %}
+{% block content %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="position: relative">
+            <h6 class="m-0 font-weight-bold text-primary" style="display: inline-block">发布公告</h6>
+            <a href="/housemaster/notice_list/1/" type="button"
+               style="display: inline-block;position: absolute;top: 8px;right: 20px"
+               class="btn btn-google">☚返回公告列表
+            </a>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" class="form-control  form-control-user" name="title1" id="title1"
+                       placeholder="请输入标题账号（20字以内）..."> <br>
+                <textarea class="form-control form-control-user" name="content1" id="content1" placeholder="请输入内容..."
+                          style="height: 400px"></textarea>
+                <hr>
+                <input id="submit" type="button" value="发布公告"
+                       class="btn btn-primary btn-user btn-block">
+            </form>
+        </div>
+    </div>
+    <script>
+        $('#submit').click(
+            function () {
+                title1 = $('#title1').val();
+                content1 = $('#content1').val();
+
+                // 构造一个数据字典
+                send_data = {
+                    'title1': title1,
+                    'content1': content1,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                };
+                $.ajax(
+                    {
+                        url: '/housemaster/get_notice_ajax/',
+                        type: "post",
+                        data: send_data,
+                        success: function (data) {
+                            alert(data.content);
+                            if(data.code == 10000){
+                                 window.location.href = '/housemaster/notice_list/'
+                            }
+
+                        },
+                        error: function (error) {
+                            console.log(error)
+                        }
+                    }
+                )
+            }
+        )
+    </script>
+{% endblock %}

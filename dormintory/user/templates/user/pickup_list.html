@@ -1,0 +1,76 @@
+{% extends 'user/base.html' %}
+{% block title %}
+    拾取信息发布列表
+{% endblock %}
+{% block search %}
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="请输入物品名字关键词..."
+                   aria-label="Search" aria-describedby="basic-addon2" name="search">
+            <div class="input-group-append">
+                <button class="btn btn-primary">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <p style="font-family: 华文行楷;color: red;display: inline-block;font-size: 30px;margin-top: 10px">{{ result }}</p>
+{% endblock %}
+{% block content %}
+    <table class="table">
+        <tr>
+            <th>单号</th>
+            <th>发布账号</th>
+            <th>拾取物品名称</th>
+            <th>物品照片</th>
+            <th>物品类型</th>
+            <th>拾取地方</th>
+            <th>拾取时间</th>
+            <th>发布时间</th>
+            <th>状态</th>
+            <th>操作</th>
+
+        </tr>
+        {% for foo in page_obj %}
+            <tr>
+                <td style="color: red">{{ foo.id }}</td>
+                <td>{{ foo.stu_id }}</td>
+                <td>{{ foo.pickup_goods_name }}</td>
+                <td><img src="/static/{{ foo.pickup_picture }}" alt="无照片" style="width: 40px;height: 40px"></td>
+                <td>{{ foo.pickup_type }}</td>
+                <td>{{ foo.pickup_location }}</td>
+                <td>{{ foo.pickup_time }}</td>
+                <td>{{ foo.send_time }}</td>
+                <td> {% if foo.status == 0 %}
+                    未找到
+                {% else %}
+                    已完成
+                {% endif %}</td>
+
+                <td>
+                    {% if foo.stu_id == stu_id %}
+                        <a href="/user/goods_pickup_look/?id={{ foo.id }}" type="button"
+                           class="btn btn-facebook">查看信息</a>
+                        <a href="/user/pickup_list/{{ page_obj.number }}/?del_id={{ foo.id }}" type="button"
+                           class="btn btn-danger">删除信息</a>
+                    {% else %}
+                        <a href="/user/goods_pickup_look/?id={{ foo.id }}" type="button"
+                           class="btn btn-dark" style="width: 180px">查看详情</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+      <ul class="pagination" style="position: absolute;bottom: 100px;left: 45%">
+        <a class="page-link" href="/user/pickup_list/1">首页</a>
+        {% if page_obj.has_previous %}
+            <a class="page-link" href="/user/pickup_list/{{ page_obj.previous_page_number }}">上一页</a>
+        {% endif %}
+        <a class="page-link" style="color: green;font-weight: 700"
+           href="/user/pickup_list/{{ page_obj.number }}">{{ page_obj.number }}</a>
+        {% if page_obj.has_next %}
+            <a class="page-link" href="/user/pickup_list/{{ page_obj.next_page_number }}">下一页</a>
+        {% endif %}
+        <a class="page-link" href="/user/pickup_list/{{ paginator.num_pages }}">尾页</a>
+    </ul>
+{% endblock %}

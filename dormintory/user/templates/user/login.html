@@ -1,0 +1,61 @@
+{% extends 'user/base1.html' %}
+
+{% block title %}
+    登录
+{% endblock %}
+{% block content %}
+    <div class="grid_3">
+        <div class="container">
+            <div class="breadcrumb1">
+                <ul>
+                    <a href="index.html"><i class="fa fa-home home_1"></i></a>
+                    <span class="divider">&nbsp;|&nbsp;</span>
+                    <li class="current-page">Login</li>
+                </ul>
+            </div>
+            <div class="services">
+                <div class="col-sm-6 login_left">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-item form-type-textfield form-item-name">
+                            <label for="edit-name">账号 <span class="form-required" title="This field is required." >*</span></label>
+                            <input type="text"  value="" size="60" maxlength="60" name="stu_id" id="stu_id"
+                                   class="form-text required">
+                        </div>
+                        <div class="form-item form-type-password form-item-pass">
+                            <label for="edit-pass">密码 <span class="form-required" title="This field is required.">*</span></label>
+                            <input type="password" id="password" name="password" size="60" maxlength="128"
+                                   class="form-text required">
+                        </div>
+                        <div class="form-actions">
+                            <input id="submit" type="submit" name="op" value="Log in" class="btn_1 submit">
+                        </div>
+                    </form>
+                      <hr>
+                                    <p align="center" style="color: #0f6848;font-family: STKaiti" id="content">
+                                        {{ result.content }}
+                                    </p>
+                </div>
+                <div class="col-sm-6">
+                     <ul class="sharing">
+                        <li><a onclick="alert('暂不支持')" class="facebook" title="Facebook"><i class="fa fa-boxed fa-fw fa-facebook"></i>
+                            Share on Facebook</a></li>
+                        <li><a onclick="alert('暂不支持')" class="twitter" title="Twitter"><i class="fa fa-boxed fa-fw fa-twitter"></i>
+                            Tweet</a></li>
+                        <li><a onclick="alert('暂不支持')" class="google" title="Google"><i class="fa fa-boxed fa-fw fa-google-plus"></i>
+                            Share on Google+</a></li>
+                        <li><a onclick="alert('暂不支持')" class="linkedin" title="Linkedin"><i class="fa fa-boxed fa-fw fa-linkedin"></i>
+                            Share on LinkedIn</a></li>
+                        <li><a onclick="alert('暂不支持')" class="mail" title="Email"><i class="fa fa-boxed fa-fw fa-envelope-o"></i>
+                            E-mail</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

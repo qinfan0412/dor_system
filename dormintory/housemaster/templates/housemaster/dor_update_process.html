@@ -1,0 +1,76 @@
+{% extends 'housemaster/base.html' %}
+{% block title %}
+    换宿申请
+{% endblock %}
+{% block content %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="position: relative">
+            <h6 class="m-0 font-weight-bold text-primary" style="display: inline-block">宿舍更换申请表</h6>
+            <a href="/housemaster/dor_update_list/1/" type="button"
+               style="display: inline-block;position: absolute;top: 8px;right: 20px"
+               class="btn btn-google">☚返回更换宿舍列表
+            </a>
+        </div>
+        <div class="card-body">
+            {% csrf_token %}
+            <form method="post">
+                {% csrf_token %}
+                <label>申请姓名：</label>
+                <input type="text" class="form-control form-control-user" value="{{ change_dor.name }}"
+                       disabled
+                       style="width: 40%;display: inline-block">
+
+                <label style="display: inline-block">申请性别：</label>
+                <input type="text" class="form-control form-control-user" value="{{ change_dor.sex }}"
+                       disabled
+                       style="width: 40%;display: inline-block"><br><br>
+                <label>申请账号：</label>
+                <input type="text" class="form-control form-control-user" value="{{ change_dor.stu_id }}"
+                       disabled
+                       style="width: 40%;display: inline-block">
+
+                <label style="display: inline-block">申请时间：</label>
+                <input type="text" class="form-control form-control-user" value="{{ change_dor.send_time }}"
+                       disabled
+                       style="width: 40%;display: inline-block"><br><br>
+
+                <label>换前宿舍：</label>
+                <input type="text" class="form-control form-control-user" value="{{ change_dor.now_dor }}"
+                       disabled
+                       style="width: 40%;display: inline-block">
+
+                <label style="display: inline-block">换后宿舍：</label>
+                <input type="text" class="form-control form-control-user" value="{{ change_dor.go_dor }}"
+                       disabled
+                       style="width: 40%;display: inline-block"><br><br>
+                <label style="display: inline-block">申请单号：</label>
+                <input type="text" class="form-control form-control-user" value="{{ change_dor.id }}" disabled
+                       style="width: 90%;display: inline-block"><br><br>
+                <label>报修原因：</label>
+                <textarea placeholder="可不填写" style="width: 90%;height: 100px;display: inline-block"
+                          class="form-control form-control-user"
+                          disabled>{{ change_dor.remarks }}</textarea><br>
+
+                <hr>
+                {% if change_dor.status == 0 %}
+
+                    <select name="status"
+                            class="btn btn-warning dropdown-toggle btn-user btn-block"
+                            style="height: 45px;width: 300px;display: inline;margin-left: 30%">
+                        <option checked value="0">------->未处理<--------</option>
+                        <option value="1">------->同意更换<--------</option>
+                        <option value="2">------->拒绝更换<--------</option>
+                    </select>
+                    <input class="btn btn-facebook" style="margin-left: 10%;width: 200px" type="submit">
+                {% elif change_dor.status == 1 %}
+                    <p style="font-size: 28px;font-family: 华文行楷;color: #6f42c1;margin-left: 40%"> 处理结果：已同意</p>
+
+                {% else %}
+                    <p style="font-size: 28px;font-family: 华文行楷;color: red;margin-left: 40%"> 处理结果：已拒绝</p>
+                {% endif %}
+
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

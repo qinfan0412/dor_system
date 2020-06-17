@@ -1,0 +1,86 @@
+{% extends 'housemaster/base.html' %}
+{% block title %}
+    报修申请列表
+{% endblock %}
+{% block search %}
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="请输入单号..."
+                   aria-label="Search" aria-describedby="basic-addon2" name="search">
+            <div class="input-group-append">
+                <button class="btn btn-primary">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <p style="font-family: 华文行楷;color: red;display: inline-block;font-size: 30px;margin-top: 10px">{{ result }}</p>
+{% endblock %}
+{% block content %}
+    <form>
+        <table class="table">
+            <tr>
+                <th>报修单号</th>
+                <th>报修账号</th>
+                <th>报修同学</th>
+                <th>报修宿舍</th>
+                <th>学生报修申请时间</th>
+                <th>申请状态</th>
+                <th>处理人</th>
+                <th>管理员处理时间</th>
+                <th>操作</th>
+            </tr>
+            {% for foo in page_obj %}
+                <tr>
+                    <td style="color: red">{{ foo.id }}</td>
+                    <td>{{ foo.stu_id }}</td>
+                    <td>{{ foo.name }}</td>
+                    <td>{{ foo.dor }}</td>
+                    <td>{{ foo.send_time }}</td>
+                    {% if  foo.status == 0 %}
+                        <td>未处理</td>
+                        {% if foo.admin == None %}
+                            <td>-</td>
+                            <td>-</td>
+                        {% else %}
+                            <td>{{ foo.admin }}</td>
+                            <td>{{ foo.process_time }}</td>
+                        {% endif %}
+                        <td>
+                            <a href="/housemaster/fix_dor_process/?id={{ foo.id }}" type="button"
+                               class="btn btn-facebook">处理一下</a>
+                        </td>
+                    {% else %}
+                        <td>已处理</td>
+                        <td>{{ foo.admin }}</td>
+                        <td>{{ foo.process_time }}</td>
+                        <td>
+                            <a href="/housemaster/fix_dor_process/?id={{ foo.id }}" type="button"
+                               class="btn btn-warning">查看详情</a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+
+
+        </table>
+    </form>
+    <ul class="pagination" style="position: absolute;bottom: 100px;left: 45%">
+        <a class="page-link" href="/housemaster/fix_dor_list/1">首页</a>
+
+        {% if page_obj.has_previous %}
+            <a class="page-link"
+               href="/housemaster/fix_dor_list/{{ page_obj.previous_page_number }}">上一页</a>
+
+        {% endif %}
+        <a class="page-link" style="color: green;font-weight: 700"
+           href="/housemaster/fix_dor_list/{{ page_obj.number }}">{{ page_obj.number }}</a>
+        {% if page_obj.has_next %}
+            <a class="page-link"
+               href="/housemaster/fix_dor_list/{{ page_obj.next_page_number }}">下一页</a>
+        {% endif %}
+
+        <a class="page-link" href="/housemaster/fix_dor_list/{{ paginator.num_pages }}">尾页</a>
+    </ul>
+
+{% endblock %}

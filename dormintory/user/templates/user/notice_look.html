@@ -1,0 +1,17 @@
+{% extends 'user/base2.html' %}
+{% block title %}
+    公告详情页
+{% endblock %}
+{% block content %}
+    <div class="about_middle" style="background: url('/static/user/images/back1.jpeg')">
+        <div class="container">
+            <h2>{{ notice.title }}</h2>
+            <p style="font-family: 华文行楷;font-size: 20px;margin-left: 10%">发布管理员：{{ notice.user_name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ notice.send_time }}</p>
+            <hr>
+            <p style="height: 1000px;width: 1000px;font-size:25px;font-family: 华文行楷;margin-left: 8% ">
+                {{ notice.content }}<br><br>
+                <span style="margin-left: 50%;font-size: 20px">最后更新时间:{{ notice.finally_time }}</span>
+            </p>
+        </div>
+    </div>
+{% endblock %}

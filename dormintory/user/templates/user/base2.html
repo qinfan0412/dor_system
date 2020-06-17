@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Marital Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link href="/static/user/css/bootstrap-3.1.1.min.css" rel='stylesheet' type='text/css'/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/static/user/js/jquery.min.js"></script>
+    <script src="/static/user/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/user/js/jquery-1.8.3.js"></script>
+    <!-- Custom Theme files -->
+    <link href="/static/user/css/style.css" rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300,400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+    <!----font-Awesome----->
+    <link href="/static/user/css/font-awesome.css" rel="stylesheet">
+    <!----font-Awesome----->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+</head>
+<body>
+<!-- ============================  头部 =========================== -->
+<div class="navbar navbar-inverse-blue navbar">
+    <!--<div class="navbar navbar-inverse-blue navbar-fixed-top">-->
+    <div class="navbar-inner navbar-inner_1">
+        <div class="container">
+            <div class="navigation">
+                <nav id="colorNav">
+                    <ul>
+                        <li class="green">
+                            <a href="#" class="icon-home"></a>
+                            <ul>
+                                <li><a href="/user/update_info/">修改个人信息</a></li>
+                                <li><a href="/user/update_password/">修改账户密码</a></li>
+                                <li><a href="/user/logout/">注销当前账户</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <a class="brand" href="/user/index2/"><img src="/static/user/images/logo1.png" alt="logo"></a>
+            <div class="pull-right">
+                <nav class="navbar nav_bottom" role="navigation">
+
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header nav_2">
+                        <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
+                                data-target="#bs-megadropdown-tabs">Menu
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"></a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                        <ul class="nav navbar-nav nav_1">
+                            <li><a href="/user/index2/">主页</a></li>
+                             <li><a href="/user/loss_list/">智能宿舍报失</a></li>
+                             <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">公告信息<span
+                                        class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/user/notice_list/">宿舍公告</a></li>
+                                    <li><a href="/user/housemaster/">宿舍管理员</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">宿舍更换<span
+                                        class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/user/update_dor_form/">宿舍更换申请</a></li>
+                                    <li><a href="/user/update_dor_history/">宿舍更换历史</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">宿舍报修<span
+                                        class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/user/fix_dor_form/">宿舍报修申请</a></li>
+                                    <li><a href="/user/fix_dor_history/">宿舍报修历史</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">投诉建议<span
+                                        class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/user/complaint/">投诉管理员</a></li>
+                                    <li><a href="/user/opinions/">其他的建议</a></li>
+                                </ul>
+                            </li>
+                            <li class="last"><a href="/user/about">关于我们</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </nav>
+            </div> <!-- end pull-right -->
+            <div class="clearfix"></div>
+        </div> <!-- end container -->
+    </div> <!-- end navbar-inner -->
+</div> <!-- end navbar-inverse-blue -->
+
+{#内容#}
+{% block content %}
+
+{% endblock %}
+
+
+</body>
+</html>

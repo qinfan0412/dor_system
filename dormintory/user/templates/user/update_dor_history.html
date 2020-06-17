@@ -1,0 +1,111 @@
+{% extends 'user/base2.html' %}
+
+{% block title %}
+    更换宿舍历史
+{% endblock %}
+{% block content %}
+    <div class="grid_3" style="background: url('/static/user/images/b1.jpg')">
+        <div class="container">
+            <div class="breadcrumb1">
+                <ul>
+                    <a href="/user/index2/"><i class="fa fa-home home_1"></i></a>
+                    <span class="divider">&nbsp;|&nbsp;</span>
+                    <li class="current-page" style="color: red;font-family: 华文行楷;font-size: 20px">Update Dormitory
+                        History
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9 profile_left2">
+                <h4 style="font-family: 华文行楷;font-size: 20px">历史更换申请 </h4>
+                {% if update_dor_form %}
+                    {% for i in update_dor_form %}
+                        <hr>
+                        <div class="profile_top"><a href="#">
+                            <div class="col-sm-3 profile_left-top">
+                                <img src="/static/user/images/a5.jpg" class="img-responsive" alt=""/>
+                            </div>
+                            <div class="col-sm-3">
+                                <ul class="login_details1">
+                                    <li>注意事项：</li>
+                                    <li><p>1.该申请为当时申请时候状态</p></li>
+                                    <li><p>2.已处理的申请无法进行操作</p></li>
+                                    <li><p>3.填写信息越全越容易通过</p></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-6">
+                                <form action="">
+                                    <table class="table_working_hours">
+
+                                        <tbody>
+
+                                        <tr class="opened_1">
+                                            <td class="day_label1" style="font-weight: 700;color: black">单号 :</td>
+                                            <td class="day_value">{{ i.id }}</td>
+
+                                        <tr class="opened_1">
+                                            <td class="day_label1" style="font-weight: 700;color: black">姓名 :</td>
+                                            <td class="day_value">{{ i.name }}</td>
+
+                                        </tr>
+                                        <tr class="opened">
+                                            <td class="day_label1" style="font-weight: 700;color: black">性别：</td>
+                                            <td class="day_value">{{ i.sex }}</td>
+                                        </tr>
+                                        <tr class="opened">
+                                            <td class="day_label1" style="font-weight: 700;color: black">专业班级：</td>
+                                            <td class="day_value">{{ i.major_class }}</td>
+                                        </tr>
+                                        <tr class="opened">
+                                            <td class="day_label1" style="font-weight: 700;color: black">更换前宿舍：</td>
+                                            <td class="day_value">{{ i.now_dor }}</td>
+                                        </tr>
+                                        <tr class="opened">
+                                            <td class="day_label1" style="font-weight: 700;color: black">更换至宿舍:</td>
+                                            <td class="day_value">{{ i.go_dor }}</td>
+                                        </tr>
+                                        <tr class="closed">
+                                            <td class="day_label1" style="font-weight: 700;color: black">申请时间 :</td>
+                                            <td class="day_value closed"><span
+                                                    style="color: red">{{ i.send_time }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="closed">
+                                            <td class="day_label1" style="font-weight: 700;color: black">处理状态 :</td>
+                                            {% if  i.status == 0 %}
+                                                <td class="day_value closed"><span style="color: red">稍等...还没有被处理</span></td>
+                                            {% elif i.status == 1 %}
+                                                <td class="day_value closed"><span style="color: green">已通过</span></td>
+                                            {% else %}
+                                                <td class="day_value closed"><span style="color: green">未通过</span></td>
+                                            {% endif %}
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <div class="buttons">
+                                        {% if  i.status == 0 %}
+                                            <a href="/user/update_dor_history/{{ i.id }}/" type="button" class="btn_1"
+                                               style="margin-left: 50px;">撤销申请单</a>
+                                        {% endif %}
+
+
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="clearfix"></div>
+                        </a></div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <p style="margin-top:50px;font-size: 140px;font-family: 华文行楷;margin-left: 10%;color: red">
+                        暂无更换 </p>
+                    <p style="margin-top:50px;font-size: 140px;font-family: 华文行楷;margin-left: 32%;color: red">
+                        申请历史 </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

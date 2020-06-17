@@ -1,0 +1,60 @@
+{% extends 'user/base2.html' %}
+{% block title %}
+    意见和建议
+{% endblock %}
+{% block content %}
+
+    <div class="about_middle">
+        <div class="container">
+            <h2>Oponions</h2>
+            <form id="contact-form" class="contact-form" method="post">
+                {% csrf_token %}
+                <fieldset>
+                    <label for="edit-name" style="display: block">你的姓名 <span class="form-required">*</span></label>
+                    <input type="text" class="btn btn-warning dropdown-toggle btn-user btn-block" name="stu_name" value="{{ stu.name }}"
+                           id="stu_name"
+                           placeholder="请输入姓名..." >
+                    <label for="edit-name">联系电话 <span class="form-required">*</span></label>
+                    <input type="text" class="btn btn-warning dropdown-toggle btn-user btn-block"  placeholder="请输入你的联系电话..."
+                           name="phone" id="phone" value="{{ stu.phone }}">
+
+                    <label for="edit-name" style="display: block;margin-top: 5px">意见或建议<span
+                            class="form-required">*</span></label>
+                    <textarea name="detail" id="detail" placeholder="请提出你宝贵的建议..."></textarea>
+                    <input name="submit" type="button" id="submit" value="提出意见" class="btn btn-primary btn-user"
+                           style="width: 100%;height: 50px;font-family: 华文行楷;font-size: 20px">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <script>
+        $('#submit').click(
+            function () {
+                stu_name = $('#stu_name').val();
+                phone = $('#phone').val();
+                detail = $('#detail').val();
+
+                // 构造一个数据字典
+                send_data = {
+                    'stu_name': stu_name,
+                    'phone': phone,
+                    'detail': detail,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                };
+                $.ajax(
+                    {
+                        url: '/user/opinions_ajax/',
+                        type: "post",
+                        data: send_data,
+                        success: function (data) {
+                            alert(data.content)
+                        },
+                        error: function (error) {
+                            console.log(error)
+                        }
+                    }
+                )
+            }
+        )
+    </script>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'housemaster/base.html' %}
+{% block title %}
+    更新个人信息
+{% endblock %}
+{% block content %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+        <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="alert('本页是为了修改用户信息\n' +
+         '注意事项:\n 1.信息可以为空\n 2.电话由数字组成\n 3.请如实填写数据\n ')"><i
+                class="fas fa-download fa-sm text-white-50"></i> 点我查看本页页面介绍
+        </button>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="position: relative">
+            <h6 class="m-0 font-weight-bold text-primary" style="display: inline-block">修改个人信息</h6>
+        </div>
+        <div class="card-body">
+            {% csrf_token %}
+            <form method="post">
+                {% csrf_token %}
+                <label style="display: inline-block">姓名：</label>
+                <input type="text" class="form-control form-control-user" name="name" value="{{ name }}"
+                       style="width: 90%;display: inline-block"><br><br>
+
+
+                <label>性别：</label>
+                {% if  sex  == '男生' %}
+                    <select name="sex" id="sex" class="form-control "
+                            style="width: 330px;margin: 5px;display: inline;">
+                        <option value="{{ sex }}">{{ sex }}</option>
+                        <option value="女生">女生</option>
+                    </select>
+                {% elif sex == '女生' %}
+                    <select name="sex" id="sex" class="form-control "
+                            style="width: 330px;margin: 5px;display: inline;">
+                        <option value="{{ sex }}">{{ sex }}</option>
+                        <option value="男生">男生</option>
+                    </select>
+                {% endif %}
+                <label style="margin-left: 6%">邮箱：</label>
+                <input type="text" class="form-control form-control-user" value="{{ email }}"
+                       disabled style="width: 50%;display: inline"><br><br>
+
+                <label>电话：</label>
+                <input type="text" class="form-control form-control-user" name="phone" value="{{ phone }}"
+                       style="width: 90%;display: inline-block"><br><br>
+                <label>住址：</label>
+                <input type="text" class="form-control form-control-user" name="location" value="{{ location }}"
+                       style="width: 90%;display: inline-block"><br><br>
+
+
+                <input type="submit" value="确认修改" class="btn btn-primary btn-user btn-block"
+                       style="width: 40%;margin-left: 30%">
+
+            </form>
+
+        </div>
+    </div>
+    <p>{{ content }}</p>
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'user/base.html' %}
+{% block title %}
+    填写丢失信息
+{% endblock %}
+{% block content %}
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="position: relative">
+            <h6 class="m-0 font-weight-bold text-primary" style="display: inline-block">发布丢失信息</h6>
+            <a href="/user/loss_list/" type="button"
+               style="display: inline-block;position: absolute;top: 8px;right: 20px"
+               class="btn btn-google">☚返回丢失信息已发布列表
+            </a>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label>物品名字：</label>
+                <input type="text" class="form-control form-control-user" name="loss_goods_name"
+                       id="loss_goods_name" placeholder="请输入物品名字"
+                       style="width: 40%;display: inline-block">
+
+
+                <label style="display: inline-block">物品照片：</label>
+                <input type="file" name="picture"><br><br>
+                <label>发布学生：</label>
+                <input type="text" class="form-control form-control-user" name="loss_name" id="loss_name"
+                       placeholder="请输入姓名" value='{{ stu.name }}'
+                       style="width: 40%;display: inline-block">
+
+                <label style="display: inline-block">联系电话：</label>
+                <input type="text" class="form-control form-control-user" name="loss_phone" id="loss_phone"
+                       placeholder="请输入电话"
+                       value='{{ stu.phone }}'
+                       style="width: 40%;display: inline-block"><br><br>
+
+                <label>物品类型：</label>
+                <select name="loss_type" id="loss_type"
+                        class="btn btn-warning dropdown-toggle btn-user btn-block"
+                        style="height: 45px;display: inline-block;width: 40%">
+                    {% for foo in goods_info.type_list %}
+                        <option value="{{ foo }}">{{ foo }}</option>
+                    {% endfor %}
+                </select>
+                <label style="display: inline-block">丢失地点：</label>
+                <select name="loss_location" id="loss_location"
+                        class="btn btn-warning dropdown-toggle btn-user btn-block"
+                        style="height: 45px;width:40%;display: inline-block">
+                    {% for foo in goods_info.location_list %}
+                        <option value="{{ foo }}">{{ foo }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+
+                <label style="display: inline-block">丢失时间：</label>
+                <select name="loss_Y" id="loss_Y" class="btn btn-warning dropdown-toggle btn-user btn-block"
+                        style="display: inline-block;width: 13%;margin-top: 5px">
+                    {% for foo in goods_info.Y_list %}
+                        <option value="{{ foo }}">{{ foo }}</option>
+                    {% endfor %}
+                </select>
+                &nbsp;-&nbsp;
+                <select name="loss_M" id="loss_M" class="btn btn-warning dropdown-toggle btn-user btn-block"
+                        style="display: inline-block;width: 10%">
+                    {% for foo in goods_info.M_list %}
+                        <option value="{{ foo }}">{{ foo }}</option>
+                    {% endfor %}
+                </select>
+                &nbsp;-&nbsp;
+                <select name="loss_D" id="loss_D" class="btn btn-warning dropdown-toggle btn-user btn-block"
+                        style="display: inline-block;width: 10%">
+                    {% for foo in goods_info.D_list %}
+                        <option value="{{ foo }}">{{ foo }}</option>
+                    {% endfor %}
+                </select> &nbsp;&nbsp;
+                <select name="loss_h" id="loss_h" class="btn btn-warning dropdown-toggle btn-user btn-block"
+                        style="display: inline-block;width: 14%">
+                    {% for foo in goods_info.h_list %}
+                        <option value="{{ foo }}">{{ foo }}</option>
+                    {% endfor %}
+                </select>
+                &nbsp;:&nbsp;
+                <select name="loss_m" id="loss_m" class="btn btn-warning dropdown-toggle btn-user btn-block"
+                        style="display: inline-block;width: 14%">
+                    {% for foo in goods_info.m_list %}
+                        <option value="{{ foo }}">{{ foo }}</option>
+                    {% endfor %}
+                </select>
+                &nbsp;:&nbsp;
+                <select name="loss_s" id="loss_s" class="btn btn-warning dropdown-toggle btn-user btn-block"
+                        style="display: inline-block;width: 12%">
+                    {% for foo in goods_info.s_list %}
+                        <option value="{{ foo }}">{{ foo }}</option>
+                    {% endfor %}
+                </select> <br><br>
+
+                <label>丢失备注：</label>
+                <textarea placeholder="可不填写" style="width: 90%;height: 100px;display: inline-block;margin-top: 8px"
+                          class="form-control form-control-user" name="loss_remarks" id="loss_remarks"
+                          placeholder="请输入其他信息">{{ change_dor.remarks }}</textarea><br>
+                <hr>
+                <input type="submit" value="发布丢失信息到系统"
+                       class="btn btn-primary btn-user btn-block">
+            </form>
+        </div>
+    </div>
+<p style="font-family: 华文行楷;font-size: 20px;color: red;margin-left: 40%">{{ result }}</p>
+{% endblock %}

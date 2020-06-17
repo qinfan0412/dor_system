@@ -1,0 +1,82 @@
+{% extends 'user/base2.html' %}
+
+{% block title %}
+    更换宿舍申请
+{% endblock %}
+{% block content %}
+    <div class="grid_3" style="background: url('/static/user/images/b1.jpg')">
+        <div class="container">
+            <div class="breadcrumb1">
+                <ul>
+                    <a href="/user/index2/"><i class="fa fa-home home_1"></i></a>
+                    <span class="divider">&nbsp;|&nbsp;</span>
+                    <li class="current-page" style="color: red;font-family: 华文行楷;font-size: 20px">更换宿舍申请单</li>
+                </ul>
+            </div>
+            <div class="services">
+                <div class="col-sm-6 login_left">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="edit-name">姓名 <span class="form-required">*</span></label>
+                            <input type="text" name="user_name" id='user_name' size="60" disabled
+                                   value="{{ user.name }}"
+                                   maxlength="60" class="btn btn-warning dropdown-toggle btn-user btn-block"
+                                   placeholder="请输入姓名"
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-name">性别 <span class="form-required">*</span></label>
+                            <select name="sex" id="sex" disabled
+                                    class="btn btn-warning dropdown-toggle btn-user btn-block"
+                                    style="height: 45px;display: inline">
+                                <option value="男生">{{ user.sex }}</option>
+                            </select></div>
+
+                        <div class="form-group">
+                            <label for="edit-name">专业班级 <span class="form-required">*</span></label>
+                            <input type="text" value="{{ user.major_class }}" size="60" name="major_class"
+                                   maxlength="60" placeholder="请输入专业"
+                                   class="btn btn-warning dropdown-toggle btn-user btn-block">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="edit-name">当前宿舍：【{{ user.dor.num }}】,请选择新宿舍 <span
+                                    class="form-required">*</span></label><br>
+                            <select name="dor" id="dor"
+                                    class="btn btn-warning dropdown-toggle btn-user btn-block"
+                                    style="height: 45px;display: inline">
+                                {% for i in all_dor %}
+                                    <option value="{{ i.num }}">{{ i.num }}({{ i.sex }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="edit-name">备注 <span class="form-required">*</span></label>
+                            <textarea class="btn btn-warning dropdown-toggle btn-user btn-block"
+                                      style="height: 100px" name="remarks"
+                                      placeholder="备注信息"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" value="提交更换申请" class="btn btn-primary"
+                                   style="margin-left: 35%">
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="col-sm-6">
+                <p style="margin-top:50px;font-size: 40px;font-family: 华文行楷;margin-left: 10%;color: green">
+                    {{ content }}   </p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

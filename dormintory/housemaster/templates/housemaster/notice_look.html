@@ -1,0 +1,25 @@
+{% extends 'housemaster/base.html' %}
+{% block content %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="position: relative">
+            <h6 class="m-0 font-weight-bold text-primary" style="display: inline-block">查看公告</h6>
+            <a href="/housemaster/notice_list/1/" type="button"
+               style="display: inline-block;position: absolute;top: 8px;right: 20px"
+               class="btn btn-google">☚返回公告列表
+            </a>
+        </div>
+        <div class="card-body">
+            {% csrf_token %}
+            <input type="text" class="form-control  form-control-user"
+                   placeholder="请输入标题账号（20字以内）..." value="{{ notice.title }}" disabled> <br>
+            <input type="text" class="form-control  form-control-user"
+                   placeholder="请输入标题账号（20字以内）..." value="发布时间：{{ notice.send_time }}" disabled> <br>
+            <input type="text" class="form-control  form-control-user"
+                   placeholder="请输入标题账号（20字以内）..." value="最后更新时间：{{ notice.finally_time }}" disabled> <br>
+            <textarea class="form-control form-control-user" placeholder="请输入内容..."
+                      style="height: 340px" disabled>{{ notice.content }}</textarea>
+
+        </div>
+    </div>
+
+{% endblock %}
